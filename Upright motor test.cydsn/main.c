@@ -144,7 +144,7 @@ void hold(){
 
 void offTime(){
     int sec = 0;
-    int min = 5;
+    int min = holdTime;
 	Up_Write(0);
 	Down_Write(0);
     while(sec != 0 || min != 0){
