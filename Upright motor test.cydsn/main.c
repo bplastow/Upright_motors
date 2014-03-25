@@ -654,23 +654,98 @@ void peak_push(){
 }
 
 void peak_pull(){
+    run_mode = 2;
+    down();
+    up();
+    current_cycle_count++;
     
+    if(current_cycle_count == peakpull_cycle_count){
+        Cont_Reg_Write(0);
+        run_mode = 1;
+    }
+    display_update();
+    offTime();
+    
+    while(current_cycle_count < peakpull_cycle_count){
+        display_update();
+        peak_pull();
+    }
 }
 
 void regular_push(){
+    run_mode = 2;
+    up();
+    down();
+    current_cycle_count++;
     
+    if(current_cycle_count == peakpush_cycle_count){
+        Cont_Reg_Write(0);
+        run_mode = 1;
+    }
+    display_update();
+    offTime();
+    
+    while(current_cycle_count < peakpush_cycle_count){
+        display_update();
+        regular_push();
+    }
 }
 
 void regular_pull(){
+    run_mode = 2;
+    down();
+    up();
+    current_cycle_count++;
     
+    if(current_cycle_count == peakpull_cycle_count){
+        Cont_Reg_Write(0);
+        run_mode = 1;
+    }
+    display_update();
+    offTime();
+    
+    while(current_cycle_count < peakpull_cycle_count){
+        display_update();
+        regular_pull();
+    }
 }
 
 void top_limit(){
+    run_mode = 2;
+    up();
+    down();
+    current_cycle_count++;
     
+    if(current_cycle_count == peakpush_cycle_count){
+        Cont_Reg_Write(0);
+        run_mode = 1;
+    }
+    display_update();
+    offTime();
+    
+    while(current_cycle_count < peakpush_cycle_count){
+        display_update();
+        top_limit();
+    }
 }
 
 void bottom_limit(){
+    run_mode = 2;
+    up();
+    down();
+    current_cycle_count++;
     
+    if(current_cycle_count == peakpush_cycle_count){
+        Cont_Reg_Write(0);
+        run_mode = 1;
+    }
+    display_update();
+    offTime();
+    
+    while(current_cycle_count < peakpush_cycle_count){
+        display_update();
+        bottom_limit();
+    }
 }
 
 /***********************************************************************************************************
