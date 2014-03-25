@@ -1,5 +1,5 @@
-X:\Users\Blaine\Projects\Upright motor tester\Upright motor test\Upright motor test.cydsn\TopDesign\TopDesign.cysch
-X:\Users\Blaine\Projects\Upright motor tester\Upright motor test\Upright motor test.cydsn\TopDesign
+C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\TopDesign\TopDesign.cysch
+C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\TopDesign
 C:\Program Files (x86)\Cypress\PSoC Creator\3.0\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CharLCD_v1_90\CharLCD_v1_90.cysch
 C:\Program Files (x86)\Cypress\PSoC Creator\3.0\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CharLCD_v1_90\CharLCD_v1_90.cysym
 C:\Program Files (x86)\Cypress\PSoC Creator\3.0\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CharLCD_v1_90\CharLCD_v1_90.pdf
@@ -445,7 +445,7 @@ C:\Program Files (x86)\Cypress\PSoC Creator\3.0\PSoC Creator\psoc\content\cyprim
 C:\Program Files (x86)\Cypress\PSoC Creator\3.0\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v1_90\PSoC5\API\aliases.h
 C:\Program Files (x86)\Cypress\PSoC Creator\3.0\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v1_90\PSoC5\API\pins.c
 C:\Program Files (x86)\Cypress\PSoC Creator\3.0\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\cy_pins_v1_90\PSoC5\API\pins.h
-X:\Users\Blaine\Projects\Upright motor tester\Upright motor test\Upright motor test.cydsn\Upright motor test.cydwr
+C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\Upright motor test.cydwr
 C:\Program Files (x86)\Cypress\PSoC Creator\3.0\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\cy_boot_v4_0\PSoC5\API\cm3gcc.ld
 C:\Program Files (x86)\Cypress\PSoC Creator\3.0\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\cy_boot_v4_0\PSoC5\API\Cm3RealView.scat
 C:\Program Files (x86)\Cypress\PSoC Creator\3.0\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\cy_boot_v4_0\PSoC5\API\Cm3Start.c

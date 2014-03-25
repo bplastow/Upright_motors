@@ -1,3 +1,3 @@
-# Component constraints for X:\Users\Blaine\Projects\Upright motor tester\Upright motor test\Upright motor test.cydsn\TopDesign\TopDesign.cysch
-# Project: X:\Users\Blaine\Projects\Upright motor tester\Upright motor test\Upright motor test.cydsn\Upright motor test.cyprj
-# Date: Thu, 20 Mar 2014 21:56:24 GMT
+# Component constraints for C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\TopDesign\TopDesign.cysch
+# Project: C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\Upright motor test.cyprj
+# Date: Tue, 25 Mar 2014 18:00:53 GMT

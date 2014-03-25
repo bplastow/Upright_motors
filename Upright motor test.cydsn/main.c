@@ -10,17 +10,57 @@
  * ========================================
 */
 #include <project.h>
+#include "stdio.h"
 
+int rest;
 int cycles = 0;
 int first = 0;
 int holdTime = 5; //hold time in minutes
+char* display_time;
+
 int menu_select = 0;
 int menu2_select = 1;
-int run_mode;
+int run_mode = 1;
+int current_count;
+int current_cycle_count;
+int cycle_count;
+int time_delay;
+int Reset_count = 0;
+int reset_time;
+int incline_delay_current;
+
+//asdf
+int incline_up_delay = 20;
+int incline_down_delay = 10;
+//int max_incline_sense = 100;
+///asfd
+
+//peak push test timing
+int peakpush_time_delay = 1;
+int peakpush_cycle_count = 10;
+
+//peak pull test timing
+int peakpull_time_delay = 300;
+int peakpull_cycle_count = 10;
+
+//regular push test timing
+int regularpush_time_delay = 300;            
+int regularpush_cycle_count = 300;
+
+//regular pull test timing
+int regularpull_time_delay = 300;            
+int regularpull_cycle_count = 300;
+
+//limit switch test timing
+int toplimit_time_delay = 60;           
+int toplimit_cycle_count = 1500;
+int bottomlimit_time_delay = 60;
+int bottomlimit_cycle_count = 1500;
 
 char* test;
 char* menu_select2test;
 char* menu_upper;
+char time_display[4];
 
 void up(void);
 void down(void);
@@ -33,6 +73,9 @@ void regular_pull(void);
 void regular_push(void);
 void top_limit(void);
 void bottom_limit(void);
+void display_update(void);
+void menu_update(void);
+void running_display(void);
 
 int main()
 {
@@ -41,24 +84,11 @@ int main()
     Clock_1_Start();
 	
     /* CyGlobalIntEnable; */ /* Uncomment this line to enable global interrupts. */
-    Disp_Position(0,0);
-    Disp_PrintString("Cycles: ");
-	Disp_PrintNumber(cycles);
 	
 	for(;;)
     {
-		if(But_Reg_Read() == 30){
-            Cont_Reg_Write(1);
-        }
-        else if(But_Reg_Read() == 29){
-            Cont_Reg_Write(2);
-        }
-        else{
-            Cont_Reg_Write(0);
-        }
-        
-        menuSel();
-        
+        menu_update();
+		display_update();       
         /* if(pinStart_Read() == 0 || first == 1){
             
             
@@ -91,7 +121,6 @@ int main()
 	*/	
     }
         
-    return 0;
     
 }
 
@@ -125,39 +154,39 @@ void display_update()
 		case 1:									//menu 2
 			if (menu2_select == 1)
 			{
-			    menu_select2test = "Peak Pull";
-                time_delay = normal_time_delay;
-                cycle_count = normal_cycle_count;
+			    menu_select2test = "Peak Push";
+                time_delay = peakpush_time_delay;
+                cycle_count = peakpush_cycle_count;
 		    }
 			else if (menu2_select == 2)
 			{
-				menu_select2test = "Peak Push";
-                time_delay = nineCycle_time_delay;           //cycle every 2 minutes
-                cycle_count = nine_cycle_count;
+				menu_select2test = "Peak Pull";
+                time_delay = peakpull_time_delay;           
+                cycle_count = peakpull_cycle_count;
 			}					
 			else if (menu2_select == 3)
 			{
-				menu_select2test = "Regular Pull";
-                time_delay = nusiance_time_delay;            //cycle every 2 minutes
-                cycle_count = nusiance_cycle_count;
+				menu_select2test = "Regular Push";
+                time_delay = regularpush_time_delay;           
+                cycle_count = regularpush_cycle_count;
 			}	
 			else if (menu2_select == 4)
 			{
-				menu_select2test = "Regular Push";
-                time_delay = nusiance_time_delay;            //cycle every 2 minutes
-                cycle_count = nusiance_cycle_count;
+				menu_select2test = "Regular Pull";
+                time_delay = regularpull_time_delay;            
+                cycle_count = regularpull_cycle_count;
 			}		
 			else if (menu2_select == 5)
 			{
-				menu_select2test = "Limit Switch";
-                time_delay = nusiance_time_delay;            //cycle every 2 minutes
-                cycle_count = nusiance_cycle_count;
+				menu_select2test = "Top Limit Switch";
+                time_delay = toplimit_time_delay;            
+                cycle_count = toplimit_cycle_count;
 			}
             else if (menu2_select == 6)
 			{
-				menu_select2test = "Life Cycle";
-                time_delay = life_cycle_delay;
-                cycle_count = life_cycle_count;
+				menu_select2test = "Bottom Limit Switch";
+                time_delay = bottomlimit_time_delay;
+                cycle_count = bottomlimit_cycle_count;
 		    }
 					
 				
@@ -170,7 +199,7 @@ void display_update()
 		case 2:
 				
 			Disp_Position(0,0);
-			Disp_PrintString("Incline up");
+			Disp_PrintString("Up delay");
 			Disp_Position(1,0);
 			Disp_PrintNumber(incline_up_delay);
 			Disp_PrintString("s");
@@ -178,21 +207,21 @@ void display_update()
 		
 		case 3:
 			Disp_Position(0,0);
-			Disp_PrintString("Incline Down");
+			Disp_PrintString("Down delay");
 			Disp_Position(1,0);
 			Disp_PrintNumber(incline_down_delay);
 			Disp_PrintString("s");
 			break;
 		
-		case 4:
-			Disp_Position(0,0);
-			Disp_PrintString("Sense Count");
-			Disp_Position(1,0);
-			Disp_PrintNumber(max_incline_sense);
-			Disp_PrintString("c");
-			break;
+//		case 4:
+//			Disp_Position(0,0);
+//			Disp_PrintString("Sense Count");
+//			Disp_Position(1,0);
+//			Disp_PrintNumber(max_incline_sense);
+//			Disp_PrintString("c");
+//			break;
 			
-		case 5:
+		case 4:
 			Disp_Position(0,0);
 			Disp_PrintString("Cycles to run");
 			Disp_Position(1,0);
@@ -200,7 +229,7 @@ void display_update()
 			Disp_PrintString("c");
 			break;
 			
-		case 6:
+		case 5:
 			Disp_Position(0,0);
 			Disp_PrintString("Time Delay");
 			Disp_Position(1,0);
@@ -208,7 +237,7 @@ void display_update()
 			Disp_PrintString("s");
 			break;
 			
-		case 7:
+		case 6:
 			Disp_Position(0,0);
 			Disp_PrintString("Reset Count");
 			Disp_Position(1,0);
@@ -259,7 +288,7 @@ void menu_update()
 			case 4:
 				current_count = 0;
                 current_cycle_count = 0;
-				regular_pull();            //Regular pull test
+				regular_pull();            //Regular pull test cycling
 			break;
 			
 			case 5:
@@ -278,14 +307,14 @@ void menu_update()
 /**************************************************************************
 ************************* Up Button ***************************************
 ***************************************************************************/    
-    if(But_Reg_Read() == 27)
+    if(But_Reg_Read() == 30)
     {
         Disp_ClearDisplay();
         switch (menu_select)
         {
             default:
                 //incline up
-                while(But_Reg_Read() == 27)
+                while(But_Reg_Read() == 30)
                 {
                     Cont_Reg_Write(1);
                     display_update();
@@ -310,30 +339,40 @@ void menu_update()
                 incline_down_delay++;
                 break;
                 
-            case 4:
-                max_incline_sense++;
-                break;
+//            case 4:
+//                max_incline_sense++;
+//                break;
 				
-		    case 5:
+		    case 4:
                 if(menu2_select == 1)
                 {
-                    normal_cycle_count++;
-                    cycle_count = normal_cycle_count;
+                    peakpush_cycle_count++;
+                    cycle_count = peakpush_cycle_count;
                 }
                 else if(menu2_select == 2)
                 {
-                    nine_cycle_count++;
-                    cycle_count = nine_cycle_count;
+                    peakpull_cycle_count++;
+                    cycle_count = peakpull_cycle_count;
                 }
                 else if(menu2_select == 3)
                 {
-                    nusiance_cycle_count++;
-                    cycle_count = nusiance_cycle_count;
+                    regularpush_cycle_count++;
+                    cycle_count = regularpush_cycle_count;
+                }
+                else if(menu2_select == 4)
+                {
+                    regularpull_cycle_count++;
+                    cycle_count = regularpull_cycle_count;
+                }
+                else if(menu2_select == 5)
+                {
+                    toplimit_cycle_count++;
+                    cycle_count = toplimit_cycle_count;
                 }
                 else if (menu2_select == 6)
                 {
-                    life_cycle_count = life_cycle_count + 200;
-                    cycle_count = life_cycle_count;
+                    bottomlimit_cycle_count++;
+                    cycle_count = bottomlimit_cycle_count;
                 }
                 else
                 {
@@ -341,26 +380,36 @@ void menu_update()
                 }
 				break;
 				
-			case 6:
+			case 5:
                 if(menu2_select == 1)
                 {
-                    normal_time_delay++;
-                    time_delay = normal_time_delay;
+                    peakpush_time_delay++;
+                    time_delay = peakpush_time_delay;
                 }
                 else if(menu2_select == 2)
                 {
-                    nineCycle_time_delay++;
-                    time_delay = nineCycle_time_delay;
+                    peakpull_time_delay++;
+                    time_delay = peakpull_time_delay;
                 }
                 else if(menu2_select == 3)
                 {
-                    nusiance_time_delay++;
-                    time_delay = nusiance_time_delay;
+                    regularpush_time_delay++;
+                    time_delay = regularpush_time_delay;
+                }
+                else if(menu2_select == 4)
+                {
+                    regularpull_time_delay++;
+                    time_delay = regularpull_time_delay;
+                }
+                else if(menu2_select == 5)
+                {
+                    toplimit_time_delay++;
+                    time_delay = toplimit_time_delay;
                 }
                 else if(menu2_select == 6)
                 {
-                    life_cycle_delay++;
-                    time_delay = life_cycle_delay;
+                    bottomlimit_time_delay++;
+                    time_delay = bottomlimit_time_delay;
                 }
                 else
                 {
@@ -368,11 +417,11 @@ void menu_update()
                 }
                 break;
 				
-            case 7:
+            case 6:
                 Reset_count = 0;
                 break;
         }
-        while(But_Reg_Read() == 27)
+        while(But_Reg_Read() == 30)
         {
             display_update();
                 
@@ -382,14 +431,14 @@ void menu_update()
 /**************************************************************************
 ************************* Down Cycle **************************************
 ***************************************************************************/	
-    if(But_Reg_Read() == 23)
+    if(But_Reg_Read() == 29)
     {
         Disp_ClearDisplay();
         switch (menu_select)
         {
             default:
                 //incline down
-                while(But_Reg_Read() == 23)
+                while(But_Reg_Read() == 29)
                 {
                     Cont_Reg_Write(2);
                     display_update();
@@ -413,30 +462,40 @@ void menu_update()
                 incline_down_delay--;
                 break;
 				
-            case 4:
-                max_incline_sense--;
-                break;
+//            case 4:
+//                max_incline_sense--;
+//                break;
                 
-		    case 5:
+		    case 4:
                 if(menu2_select == 1)
                 {
-                    normal_cycle_count--;
-                    cycle_count = normal_cycle_count;
+                    peakpush_cycle_count--;
+                    cycle_count = peakpush_cycle_count;
                 }
                 else if(menu2_select == 2)
                 {
-                    nine_cycle_count--;
-                    cycle_count = nine_cycle_count;
+                    peakpull_cycle_count--;
+                    cycle_count = peakpull_cycle_count;
                 }
                 else if(menu2_select == 3)
                 {
-                    nusiance_cycle_count--;
-                    cycle_count = nusiance_cycle_count;
+                    regularpush_cycle_count--;
+                    cycle_count = regularpush_cycle_count;
+                }
+                else if(menu2_select == 4)
+                {
+                    regularpull_cycle_count--;
+                    cycle_count = regularpull_cycle_count;
+                }
+                else if(menu2_select == 5)
+                {
+                    toplimit_cycle_count--;
+                    cycle_count = toplimit_cycle_count;
                 }
                 else if (menu2_select == 6)
                 {
-                    life_cycle_count = life_cycle_count - 200;
-                    cycle_count = life_cycle_count;
+                    bottomlimit_cycle_count++;
+                    cycle_count =  bottomlimit_cycle_count;
                 }
                 else
                 {
@@ -444,30 +503,36 @@ void menu_update()
                 }	
 				break;
 				
-		    case 6:
+		    case 5:
                 if(menu2_select == 1)
                 {
-                    normal_time_delay--;
-                    //time_delay--;
-                    time_delay = normal_time_delay;
+                    peakpush_time_delay--;
+                    time_delay = peakpush_time_delay;
                 }
                 else if(menu2_select == 2)
                 {
-                    nineCycle_time_delay--;
-                    //time_delay--;
-                    time_delay = nineCycle_time_delay;
+                    peakpull_time_delay--;
+                    time_delay = peakpull_time_delay;
                 }
                 else if(menu2_select == 3)
                 {
-                    nusiance_time_delay--;
-                    //time_delay--;
-                    time_delay = nusiance_time_delay;
+                    regularpush_time_delay--;
+                    time_delay = regularpush_time_delay;
+                }
+                else if(menu2_select == 4)
+                {
+                    regularpull_time_delay--;
+                    time_delay = regularpull_time_delay;
+                }
+                else if(menu2_select == 5)
+                {
+                    toplimit_time_delay--;
+                    time_delay = toplimit_time_delay;
                 }
                 else if(menu2_select == 6)
                 {
-                    life_cycle_delay--;
-                    //time_delay--;
-                    time_delay = life_cycle_delay;
+                    bottomlimit_time_delay--;
+                    time_delay = bottomlimit_time_delay;
                 }
                 else
                 {
@@ -475,12 +540,12 @@ void menu_update()
                 }
                 break;
 				
-            case 7:
+            case 6:
                 Reset_count = 0;
                 break;
         }
             
-        while(But_Reg_Read() == 23)
+        while(But_Reg_Read() == 29)
         {
             display_update();
         }
@@ -489,32 +554,32 @@ void menu_update()
 /**************************************************************************
 ************************* Menu Cycle **************************************
 ***************************************************************************/	
-	if(But_Reg_Read() == 30)
+	if(But_Reg_Read() == 27)
 	{
 		menu_select++;
 		Disp_ClearDisplay();
 
-		if (menu_select > 7)
+		if (menu_select > 6)
 		{
 			menu_select = 0;
 		}
-		while(But_Reg_Read() == 30)
+		while(But_Reg_Read() == 27)
 		{
 			display_update();
 		}
 	}
 
-	else if(But_Reg_Read() == 29)
+	else if(But_Reg_Read() == 23)
 	{
 		menu_select--;
 		Disp_ClearDisplay();
 			
 		if (menu_select < 0)
 		{
-			menu_select = 7;
+			menu_select = 6;
 		}
 			
-		while(But_Reg_Read() == 29)
+		while(But_Reg_Read() == 23)
 		{
 			display_update();
 		}
@@ -525,17 +590,27 @@ void menu_update()
 }
 
 void up(){
+    rest = 0;
+    incline_delay_current = incline_up_delay;
     Cont_Reg_Write(1);
-    CyDelay(10000);  // was 13500 for full cycle with 50 lb load
-					// was 5800 for 50 lb load to do half cycle
-					// was 3900 for no load cycling
+    running_display();
+    while(incline_delay_current != 0){
+        running_display();
+        incline_delay_current--;
+        CyDelay(1000);
+    }
 }
 
 void down(){
+    rest = 0;
+    incline_delay_current = incline_down_delay;
     Cont_Reg_Write(2);
-    CyDelay(23000); // was 9700 for full cycle with 50 lb load
-				   // was 5000 for 50 lb load to do half cycle
-				   // was 4700 for no load cycling
+    running_display();
+    while(incline_delay_current != 0){
+        running_display();
+        incline_delay_current--;
+        CyDelay(1000);
+    }
 }
 
 void hold(){
@@ -544,28 +619,79 @@ void hold(){
 }
 
 void offTime(){
-    int sec = 0;
-    int min = holdTime;
-	Up_Write(0);
-	Down_Write(0);
-    while(sec != 0 || min != 0){
+    int sec = time_delay;
+	Cont_Reg_Write(0);
+    while(sec != 0){
+        Disp_Position(0,0);
+        Disp_PrintString("Running");
         Disp_Position(1,0);
-        Disp_PrintString("Time Left: ");
-        Disp_PrintNumber(min);
-        Disp_PrintString(":");
-        if(sec < 10){
-            Disp_PrintNumber(0);
-        }
         Disp_PrintNumber(sec);
+        Disp_PrintString("s ");
         CyDelay(1000);
         sec = sec - 1;
-        if(sec < 0){
-            min = min - 1;
-            sec = 59;
-        }
     }
     Disp_Position(1,0);
     Disp_PrintString("                ");
+}
+
+void peak_push(){
+    run_mode = 2;
+    up();
+    down();
+    current_cycle_count++;
+    
+    if(current_cycle_count == peakpush_cycle_count){
+        Cont_Reg_Write(0);
+        run_mode = 1;
+    }
+    display_update();
+    offTime();
+    
+    while(current_cycle_count < peakpush_cycle_count){
+        display_update();
+        peak_push();
+    }
+}
+
+void peak_pull(){
+    
+}
+
+void regular_push(){
+    
+}
+
+void regular_pull(){
+    
+}
+
+void top_limit(){
+    
+}
+
+void bottom_limit(){
+    
+}
+
+/***********************************************************************************************************
+********************************** Running display *********************************************************
+************************************************************************************************************/
+void running_display()
+{
+	Disp_Position(0,0);
+	Disp_PrintString("Running");
+	Disp_Position(0,12);
+	Disp_PrintNumber(current_cycle_count);
+	Disp_PrintString("c");
+		
+	if (!rest)
+    {
+	    Disp_Position(1,0);
+	    sprintf(time_display,"%1i",incline_delay_current);
+	    display_time = time_display;
+	    Disp_PrintString(display_time);
+	    Disp_PrintString("s ");
+	}
 }
 
 /* [] END OF FILE */
