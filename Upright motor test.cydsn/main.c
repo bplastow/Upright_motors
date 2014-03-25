@@ -36,7 +36,7 @@ int incline_down_delay = 10;
 ///asfd
 
 //peak push test timing
-int peakpush_time_delay = 1;
+int peakpush_time_delay = 300;
 int peakpush_cycle_count = 10;
 
 //peak pull test timing
