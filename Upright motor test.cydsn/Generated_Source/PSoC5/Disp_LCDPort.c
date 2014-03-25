@@ -1,0 +1,143 @@
+/*******************************************************************************
+* File Name: Disp_LCDPort.c  
+* Version 1.90
+*
+* Description:
+*  This file contains API to enable firmware control of a Pins component.
+*
+* Note:
+*
+********************************************************************************
+* Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+* You may use this file only in accordance with the license, terms, conditions, 
+* disclaimers, and limitations in the end user license agreement accompanying 
+* the software package with which this file was provided.
+*******************************************************************************/
+
+#include "cytypes.h"
+#include "Disp_LCDPort.h"
+
+/* APIs are not generated for P15[7:6] on PSoC 5 */
+#if !(CY_PSOC5A &&\
+	 Disp_LCDPort__PORT == 15 && ((Disp_LCDPort__MASK & 0xC0) != 0))
+
+
+/*******************************************************************************
+* Function Name: Disp_LCDPort_Write
+********************************************************************************
+*
+* Summary:
+*  Assign a new value to the digital port's data output register.  
+*
+* Parameters:  
+*  prtValue:  The value to be assigned to the Digital Port. 
+*
+* Return: 
+*  None
+*  
+*******************************************************************************/
+void Disp_LCDPort_Write(uint8 value) 
+{
+    uint8 staticBits = (Disp_LCDPort_DR & (uint8)(~Disp_LCDPort_MASK));
+    Disp_LCDPort_DR = staticBits | ((uint8)(value << Disp_LCDPort_SHIFT) & Disp_LCDPort_MASK);
+}
+
+
+/*******************************************************************************
+* Function Name: Disp_LCDPort_SetDriveMode
+********************************************************************************
+*
+* Summary:
+*  Change the drive mode on the pins of the port.
+* 
+* Parameters:  
+*  mode:  Change the pins to this drive mode.
+*
+* Return: 
+*  None
+*
+*******************************************************************************/
+void Disp_LCDPort_SetDriveMode(uint8 mode) 
+{
+	CyPins_SetPinDriveMode(Disp_LCDPort_0, mode);
+	CyPins_SetPinDriveMode(Disp_LCDPort_1, mode);
+	CyPins_SetPinDriveMode(Disp_LCDPort_2, mode);
+	CyPins_SetPinDriveMode(Disp_LCDPort_3, mode);
+	CyPins_SetPinDriveMode(Disp_LCDPort_4, mode);
+	CyPins_SetPinDriveMode(Disp_LCDPort_5, mode);
+	CyPins_SetPinDriveMode(Disp_LCDPort_6, mode);
+}
+
+
+/*******************************************************************************
+* Function Name: Disp_LCDPort_Read
+********************************************************************************
+*
+* Summary:
+*  Read the current value on the pins of the Digital Port in right justified 
+*  form.
+*
+* Parameters:  
+*  None
+*
+* Return: 
+*  Returns the current value of the Digital Port as a right justified number
+*  
+* Note:
+*  Macro Disp_LCDPort_ReadPS calls this function. 
+*  
+*******************************************************************************/
+uint8 Disp_LCDPort_Read(void) 
+{
+    return (Disp_LCDPort_PS & Disp_LCDPort_MASK) >> Disp_LCDPort_SHIFT;
+}
+
+
+/*******************************************************************************
+* Function Name: Disp_LCDPort_ReadDataReg
+********************************************************************************
+*
+* Summary:
+*  Read the current value assigned to a Digital Port's data output register
+*
+* Parameters:  
+*  None 
+*
+* Return: 
+*  Returns the current value assigned to the Digital Port's data output register
+*  
+*******************************************************************************/
+uint8 Disp_LCDPort_ReadDataReg(void) 
+{
+    return (Disp_LCDPort_DR & Disp_LCDPort_MASK) >> Disp_LCDPort_SHIFT;
+}
+
+
+/* If Interrupts Are Enabled for this Pins component */ 
+#if defined(Disp_LCDPort_INTSTAT) 
+
+    /*******************************************************************************
+    * Function Name: Disp_LCDPort_ClearInterrupt
+    ********************************************************************************
+    * Summary:
+    *  Clears any active interrupts attached to port and returns the value of the 
+    *  interrupt status register.
+    *
+    * Parameters:  
+    *  None 
+    *
+    * Return: 
+    *  Returns the value of the interrupt status register
+    *  
+    *******************************************************************************/
+    uint8 Disp_LCDPort_ClearInterrupt(void) 
+    {
+        return (Disp_LCDPort_INTSTAT & Disp_LCDPort_MASK) >> Disp_LCDPort_SHIFT;
+    }
+
+#endif /* If Interrupts Are Enabled for this Pins component */ 
+
+#endif /* CY_PSOC5A... */
+
+    
+/* [] END OF FILE */
