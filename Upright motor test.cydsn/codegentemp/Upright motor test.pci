@@ -1,5 +1,5 @@
 # Upright motor test
-# 2014-03-25 18:00:55Z
+# 2014-03-26 20:19:41Z
 
 # IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
 dont_use_io iocell 1 0
@@ -23,3 +23,4 @@ set_io "\Disp:LCDPort(4)\" iocell 4 4
 set_io "\Disp:LCDPort(5)\" iocell 4 5
 set_io "\Disp:LCDPort(6)\" iocell 4 6
 set_io "pinStart(0)" iocell 2 4
+set_io "stop(0)" iocell 6 5

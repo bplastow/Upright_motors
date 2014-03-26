@@ -7,8 +7,8 @@ set_location "Net_183_2" macrocell 0 4 0 2
 set_location "Net_183_4" macrocell 0 4 0 3
 set_location "Net_183_1" macrocell 0 4 1 0
 set_io "\Disp:LCDPort(4)\" iocell 4 4
-set_location "ClockBlock" clockblockcell -1 -1 0
 set_io "LED_Up(0)" iocell 2 2
+set_location "ClockBlock" clockblockcell -1 -1 0
 set_location "\Cont_Reg:Sync:ctrl_reg\" controlcell 0 4 6 
 set_location "\But_Reg:sts:sts_reg\" statuscell 0 4 3 
 set_io "Pin_Up(0)" iocell 2 3
@@ -20,8 +20,10 @@ set_io "Down(0)" iocell 1 2
 set_io "Up(0)" iocell 1 4
 set_io "pinStart(0)" iocell 2 4
 set_io "Pin_Down(0)" iocell 2 1
+set_io "stop(0)" iocell 6 5
 set_io "\Disp:LCDPort(1)\" iocell 4 1
 set_io "\Disp:LCDPort(0)\" iocell 4 0
 set_io "\Disp:LCDPort(3)\" iocell 4 3
 set_io "LED_Down(0)" iocell 2 0
 set_io "Menu(0)" iocell 2 5
+set_location "isr_1" interrupt -1 -1 0

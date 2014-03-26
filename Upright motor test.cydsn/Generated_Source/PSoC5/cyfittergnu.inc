@@ -276,6 +276,16 @@
 .set Pin_Up__SHIFT, 3
 .set Pin_Up__SLW, CYREG_PRT2_SLW
 
+/* isr_1 */
+.set isr_1__INTC_CLR_EN_REG, CYREG_NVIC_CLRENA0
+.set isr_1__INTC_CLR_PD_REG, CYREG_NVIC_CLRPEND0
+.set isr_1__INTC_MASK, 0x01
+.set isr_1__INTC_NUMBER, 0
+.set isr_1__INTC_PRIOR_NUM, 7
+.set isr_1__INTC_PRIOR_REG, CYREG_NVIC_PRI_0
+.set isr_1__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
+.set isr_1__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0
+
 /* Back */
 .set Back__0__MASK, 0x80
 .set Back__0__PC, CYREG_PRT2_PC7
@@ -371,6 +381,38 @@
 .set Menu__PS, CYREG_PRT2_PS
 .set Menu__SHIFT, 5
 .set Menu__SLW, CYREG_PRT2_SLW
+
+/* stop */
+.set stop__0__MASK, 0x20
+.set stop__0__PC, CYREG_PRT6_PC5
+.set stop__0__PORT, 6
+.set stop__0__SHIFT, 5
+.set stop__AG, CYREG_PRT6_AG
+.set stop__AMUX, CYREG_PRT6_AMUX
+.set stop__BIE, CYREG_PRT6_BIE
+.set stop__BIT_MASK, CYREG_PRT6_BIT_MASK
+.set stop__BYP, CYREG_PRT6_BYP
+.set stop__CTL, CYREG_PRT6_CTL
+.set stop__DM0, CYREG_PRT6_DM0
+.set stop__DM1, CYREG_PRT6_DM1
+.set stop__DM2, CYREG_PRT6_DM2
+.set stop__DR, CYREG_PRT6_DR
+.set stop__INP_DIS, CYREG_PRT6_INP_DIS
+.set stop__LCD_COM_SEG, CYREG_PRT6_LCD_COM_SEG
+.set stop__LCD_EN, CYREG_PRT6_LCD_EN
+.set stop__MASK, 0x20
+.set stop__PORT, 6
+.set stop__PRT, CYREG_PRT6_PRT
+.set stop__PRTDSI__CAPS_SEL, CYREG_PRT6_CAPS_SEL
+.set stop__PRTDSI__DBL_SYNC_IN, CYREG_PRT6_DBL_SYNC_IN
+.set stop__PRTDSI__OE_SEL0, CYREG_PRT6_OE_SEL0
+.set stop__PRTDSI__OE_SEL1, CYREG_PRT6_OE_SEL1
+.set stop__PRTDSI__OUT_SEL0, CYREG_PRT6_OUT_SEL0
+.set stop__PRTDSI__OUT_SEL1, CYREG_PRT6_OUT_SEL1
+.set stop__PRTDSI__SYNC_OUT, CYREG_PRT6_SYNC_OUT
+.set stop__PS, CYREG_PRT6_PS
+.set stop__SHIFT, 5
+.set stop__SLW, CYREG_PRT6_SLW
 
 /* Up */
 .set Up__0__MASK, 0x10
@@ -479,7 +521,7 @@
 .set CYDEV_ECC_ENABLE, 0
 .set CYDEV_HEAP_SIZE, 0x1000
 .set CYDEV_INSTRUCT_CACHE_ENABLED, 1
-.set CYDEV_INTR_RISING, 0x00000000
+.set CYDEV_INTR_RISING, 0x00000001
 .set CYDEV_PROJ_TYPE, 0
 .set CYDEV_PROJ_TYPE_BOOTLOADER, 1
 .set CYDEV_PROJ_TYPE_LOADABLE, 2

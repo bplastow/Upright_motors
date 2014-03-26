@@ -56,6 +56,11 @@
   <file name="C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\codegentemp\LED_Down_aliases.h" value="NONE;LED_Down" />
   <file name="C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\codegentemp\LED_Down.c" value="ARM_C_FILE;LED_Down" />
   <file name="C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\codegentemp\LED_Down.h" value="NONE;LED_Down" />
+  <file name="C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\codegentemp\isr_1.c" value="ARM_C_FILE;isr_1" />
+  <file name="C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\codegentemp\isr_1.h" value="NONE;isr_1" />
+  <file name="C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\codegentemp\stop_aliases.h" value="NONE;stop" />
+  <file name="C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\codegentemp\stop.c" value="ARM_C_FILE;stop" />
+  <file name="C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\codegentemp\stop.h" value="NONE;stop" />
   <file name="C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\codegentemp\Disp_LCDPort_aliases.h" value="NONE;Disp_LCDPort" />
   <file name="C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\codegentemp\Disp_LCDPort.c" value="ARM_C_FILE;Disp_LCDPort" />
   <file name="C:\Users\blaine.plastow\Documents\GitHub\Upright_motors\Upright motor test.cydsn\codegentemp\Disp_LCDPort.h" value="NONE;Disp_LCDPort" />

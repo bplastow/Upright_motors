@@ -41,6 +41,9 @@
 #include <LED_Up.h>
 #include <LED_Down_aliases.h>
 #include <LED_Down.h>
+#include <isr_1.h>
+#include <stop_aliases.h>
+#include <stop.h>
 #include <Disp_LCDPort_aliases.h>
 #include <Disp_LCDPort.h>
 #include <core_cm3_psoc5.h>

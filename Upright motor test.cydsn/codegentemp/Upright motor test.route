@@ -80,8 +80,12 @@ net ClockBlock_BUS_CLK
 	term   ":ioport2:pin3.in_clock"
 	switch ":clockblockcell.clk_bus_glb==>:udb@[UDB=(0,4)]:controlcell.busclk"
 	term   ":udb@[UDB=(0,4)]:controlcell.busclk"
+	switch ":clockblockcell.clk_bus_glb==>:interrupt_0.clock"
+	term   ":interrupt_0.clock"
 	switch ":clockblockcell.clk_bus_glb==>:ioport2:pin4.in_clock"
 	term   ":ioport2:pin4.in_clock"
+	switch ":clockblockcell.clk_bus_glb==>:ioport6:pin5.in_clock"
+	term   ":ioport6:pin5.in_clock"
 end ClockBlock_BUS_CLK
 net Net_157
 	term   ":clockblockcell.dclk_glb_0"
@@ -202,3 +206,19 @@ net Net_183_4
 	switch "Stub-:udbswitch@[UDB=(0,4)][side=top]:v96==>:udb@[UDB=(0,4)]:statuscell.status_4"
 	term   ":udb@[UDB=(0,4)]:statuscell.status_4"
 end Net_183_4
+net Net_280
+	term   ":ioport6:pin5.fb"
+	switch ":ioport6:pin5.fb==>Stub-:dsiswitch_top@[DSI=(0,5)][side=top]:dsihc_top:v11+:dsiswitch_top@[DSI=(0,5)][side=top]:dsihc_top:v9"
+	switch "OStub-:dsiswitch_top@[DSI=(0,5)][side=top]:dsihc_top:v11+:dsiswitch_top@[DSI=(0,5)][side=top]:dsihc_top:v9"
+	switch ":dsiswitch_top@[DSI=(0,5)][side=top]:dsihc_top:11,86"
+	switch ":hvswitch@[UDB=(0,4)][side=left]:20,86_f"
+	switch ":hvswitch@[UDB=(1,4)][side=left]:vseg_20_top_f"
+	switch ":hvswitch@[UDB=(2,4)][side=left]:vseg_20_top_f"
+	switch ":hvswitch@[UDB=(3,4)][side=left]:vseg_20_top_f"
+	switch ":hvswitch@[UDB=(3,4)][side=left]:20,91_b"
+	switch ":dsiswitch_bottom@[DSI=(1,5)][side=bottom]:dsihc_bottom:48,91_f"
+	switch "IStub-:dsiswitch_bottom@[DSI=(1,5)][side=bottom]:dsihc_bottom:v48+:dsiswitch_bottom@[DSI=(1,5)][side=bottom]:dsihc_bottom:v50"
+	switch "Stub-:dsiswitch_bottom@[DSI=(1,5)][side=bottom]:dsihc_bottom:v48+:dsiswitch_bottom@[DSI=(1,5)][side=bottom]:dsihc_bottom:v50==>:interrupt_idmux_0.in_2"
+	switch ":interrupt_idmux_0.interrupt_idmux_0__out==>:interrupt_0.interrupt"
+	term   ":interrupt_0.interrupt"
+end Net_280

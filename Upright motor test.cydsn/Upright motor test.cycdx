@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <blockRegMap version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://cypress.com/xsd/cyblockregmap cyblockregmap.xsd" xmlns="http://cypress.com/xsd/cyblockregmap">
-  <block name="Debounce" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-  <block name="Clock_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-  <block name="Pin_Down" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   <block name="Menu" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-  <block name="LED_Down" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-  <block name="LED_Up" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   <block name="Back" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="Clock_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="Debounce" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="isr_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="stop" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="LED_Up" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="LED_Down" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   <block name="Down" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-  <block name="Up" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="pinStart" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   <block name="Disp" BASE="0x0" SIZE="0x0" desc="" visible="true">
     <block name="LCDPort" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   </block>
-  <block name="pinStart" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="Up" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   <block name="Pin_Up" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-  <block name="Cont_Reg" BASE="0x0" SIZE="0x0" desc="" visible="true">
-    <register name="Cont_Reg_CONTROL_REG" address="0x4000647D" bitWidth="8" desc="" />
-  </block>
+  <block name="Pin_Down" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   <block name="But_Reg" BASE="0x0" SIZE="0x0" desc="" visible="true">
     <register name="But_Reg_STATUS_REG" address="0x4000646D" bitWidth="8" desc="" />
     <register name="But_Reg_MASK_REG" address="0x4000648D" bitWidth="8" desc="" />
@@ -46,5 +45,8 @@
         <value name="DISABLED" value="0" desc="Normal FIFO operation" />
       </field>
     </register>
+  </block>
+  <block name="Cont_Reg" BASE="0x0" SIZE="0x0" desc="" visible="true">
+    <register name="Cont_Reg_CONTROL_REG" address="0x4000647D" bitWidth="8" desc="" />
   </block>
 </blockRegMap>

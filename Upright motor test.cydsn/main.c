@@ -12,6 +12,8 @@
 #include <project.h>
 #include "stdio.h"
 
+uint8 stop_flag = 0;
+
 int rest;
 int cycles = 0;
 int first = 0;
@@ -80,45 +82,23 @@ void running_display(void);
 int main()
 {
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
-	Disp_Start();
+	
+    Disp_Start();
+    isr_1_Start();
     Clock_1_Start();
 	
-    /* CyGlobalIntEnable; */ /* Uncomment this line to enable global interrupts. */
+    CyGlobalIntEnable; /* Uncomment this line to enable global interrupts. */
 	
 	for(;;)
     {
         menu_update();
 		display_update();       
-        /* if(pinStart_Read() == 0 || first == 1){
-            
-            
-            first = 1;
-			
-            
-            
-            //hold();
-            
-            down();
-            
-            up();
-            
-			cycles++;
-			
-			Disp_Position(0,0);
-		    Disp_PrintString("Cycles: ");
-		    Disp_PrintNumber(cycles);
-			
-            if(cycles == 9){
-                first = 0;
-                Disp_Position(1,0);
-                Disp_PrintString("Complete");
-                break;
-            }
-			offTime();
-            
-		}
-		
-	*/	
+        if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+        }
     }
         
     
@@ -145,7 +125,7 @@ void display_update()
 			Disp_PrintString("c");
 			Disp_Position(1,0);
 			Disp_PrintNumber(reset_time);
-			Disp_PrintString("s");
+			Disp_PrintString("s ");
 			Disp_Position(1,12);
 			Disp_PrintNumber(current_cycle_count);
 			Disp_PrintString("c");	
@@ -593,10 +573,22 @@ void up(){
     rest = 0;
     incline_delay_current = incline_up_delay;
     Cont_Reg_Write(1);
+    if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+    }
     running_display();
     while(incline_delay_current != 0){
         running_display();
         incline_delay_current--;
+        if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+        }
         CyDelay(1000);
     }
 }
@@ -605,28 +597,47 @@ void down(){
     rest = 0;
     incline_delay_current = incline_down_delay;
     Cont_Reg_Write(2);
+    if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+    }
     running_display();
     while(incline_delay_current != 0){
         running_display();
         incline_delay_current--;
+        if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+        }
         CyDelay(1000);
     }
-}
-
-void hold(){
-    Cont_Reg_Write(0);
-    CyDelay(1000);
 }
 
 void offTime(){
     int sec = time_delay;
 	Cont_Reg_Write(0);
+    if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+        }
     while(sec != 0){
         Disp_Position(0,0);
         Disp_PrintString("Running");
         Disp_Position(1,0);
         Disp_PrintNumber(sec);
         Disp_PrintString("s ");
+        if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+        }
         CyDelay(1000);
         sec = sec - 1;
     }
@@ -640,6 +651,13 @@ void peak_push(){
     down();
     current_cycle_count++;
     
+    if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+        }
+    
     if(current_cycle_count == peakpush_cycle_count){
         Cont_Reg_Write(0);
         run_mode = 1;
@@ -649,6 +667,12 @@ void peak_push(){
     
     while(current_cycle_count < peakpush_cycle_count){
         display_update();
+        if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+        }
         peak_push();
     }
 }
@@ -668,6 +692,12 @@ void peak_pull(){
     
     while(current_cycle_count < peakpull_cycle_count){
         display_update();
+        if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+        }
         peak_pull();
     }
 }
@@ -676,17 +706,29 @@ void regular_push(){
     run_mode = 2;
     up();
     down();
+    if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+        }
     current_cycle_count++;
     
-    if(current_cycle_count == peakpush_cycle_count){
+    if(current_cycle_count == regularpush_cycle_count){
         Cont_Reg_Write(0);
         run_mode = 1;
     }
     display_update();
     offTime();
     
-    while(current_cycle_count < peakpush_cycle_count){
+    while(current_cycle_count < regularpush_cycle_count){
         display_update();
+        if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+        }
         regular_push();
     }
 }
@@ -695,17 +737,29 @@ void regular_pull(){
     run_mode = 2;
     down();
     up();
+    if(stop_flag == 1){
+        stop_flag = 0;
+        Cont_Reg_Write(0);
+        run_mode = 1;
+        main();
+    }
     current_cycle_count++;
     
-    if(current_cycle_count == peakpull_cycle_count){
+    if(current_cycle_count == regularpull_cycle_count){
         Cont_Reg_Write(0);
         run_mode = 1;
     }
     display_update();
     offTime();
     
-    while(current_cycle_count < peakpull_cycle_count){
+    while(current_cycle_count < regularpull_cycle_count){
         display_update();
+        if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+        }
         regular_pull();
     }
 }
@@ -714,17 +768,29 @@ void top_limit(){
     run_mode = 2;
     up();
     down();
+    if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+    }
     current_cycle_count++;
     
-    if(current_cycle_count == peakpush_cycle_count){
+    if(current_cycle_count == toplimit_cycle_count){
         Cont_Reg_Write(0);
         run_mode = 1;
     }
     display_update();
     offTime();
     
-    while(current_cycle_count < peakpush_cycle_count){
+    while(current_cycle_count < toplimit_cycle_count){
         display_update();
+        if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+        }
         top_limit();
     }
 }
@@ -733,17 +799,29 @@ void bottom_limit(){
     run_mode = 2;
     up();
     down();
+    if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+        }
     current_cycle_count++;
     
-    if(current_cycle_count == peakpush_cycle_count){
+    if(current_cycle_count == bottomlimit_cycle_count){
         Cont_Reg_Write(0);
         run_mode = 1;
     }
     display_update();
     offTime();
     
-    while(current_cycle_count < peakpush_cycle_count){
+    while(current_cycle_count < bottomlimit_cycle_count){
         display_update();
+        if(stop_flag == 1){
+            stop_flag = 0;
+            Cont_Reg_Write(0);
+            run_mode = 1;
+            main();
+        }
         bottom_limit();
     }
 }

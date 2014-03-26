@@ -111,6 +111,11 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\LED_Down.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\Cont_Reg.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\Cont_Reg.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\isr_1.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\isr_1.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\stop_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\stop.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\stop.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\prebuild.bat</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\postbuild.bat</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\CyElfTool.exe</File>

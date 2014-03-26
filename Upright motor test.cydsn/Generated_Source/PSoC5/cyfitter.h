@@ -276,6 +276,16 @@
 #define Pin_Up__SHIFT 3
 #define Pin_Up__SLW CYREG_PRT2_SLW
 
+/* isr_1 */
+#define isr_1__INTC_CLR_EN_REG CYREG_NVIC_CLRENA0
+#define isr_1__INTC_CLR_PD_REG CYREG_NVIC_CLRPEND0
+#define isr_1__INTC_MASK 0x01u
+#define isr_1__INTC_NUMBER 0u
+#define isr_1__INTC_PRIOR_NUM 7u
+#define isr_1__INTC_PRIOR_REG CYREG_NVIC_PRI_0
+#define isr_1__INTC_SET_EN_REG CYREG_NVIC_SETENA0
+#define isr_1__INTC_SET_PD_REG CYREG_NVIC_SETPEND0
+
 /* Back */
 #define Back__0__MASK 0x80u
 #define Back__0__PC CYREG_PRT2_PC7
@@ -371,6 +381,38 @@
 #define Menu__PS CYREG_PRT2_PS
 #define Menu__SHIFT 5
 #define Menu__SLW CYREG_PRT2_SLW
+
+/* stop */
+#define stop__0__MASK 0x20u
+#define stop__0__PC CYREG_PRT6_PC5
+#define stop__0__PORT 6u
+#define stop__0__SHIFT 5
+#define stop__AG CYREG_PRT6_AG
+#define stop__AMUX CYREG_PRT6_AMUX
+#define stop__BIE CYREG_PRT6_BIE
+#define stop__BIT_MASK CYREG_PRT6_BIT_MASK
+#define stop__BYP CYREG_PRT6_BYP
+#define stop__CTL CYREG_PRT6_CTL
+#define stop__DM0 CYREG_PRT6_DM0
+#define stop__DM1 CYREG_PRT6_DM1
+#define stop__DM2 CYREG_PRT6_DM2
+#define stop__DR CYREG_PRT6_DR
+#define stop__INP_DIS CYREG_PRT6_INP_DIS
+#define stop__LCD_COM_SEG CYREG_PRT6_LCD_COM_SEG
+#define stop__LCD_EN CYREG_PRT6_LCD_EN
+#define stop__MASK 0x20u
+#define stop__PORT 6u
+#define stop__PRT CYREG_PRT6_PRT
+#define stop__PRTDSI__CAPS_SEL CYREG_PRT6_CAPS_SEL
+#define stop__PRTDSI__DBL_SYNC_IN CYREG_PRT6_DBL_SYNC_IN
+#define stop__PRTDSI__OE_SEL0 CYREG_PRT6_OE_SEL0
+#define stop__PRTDSI__OE_SEL1 CYREG_PRT6_OE_SEL1
+#define stop__PRTDSI__OUT_SEL0 CYREG_PRT6_OUT_SEL0
+#define stop__PRTDSI__OUT_SEL1 CYREG_PRT6_OUT_SEL1
+#define stop__PRTDSI__SYNC_OUT CYREG_PRT6_SYNC_OUT
+#define stop__PS CYREG_PRT6_PS
+#define stop__SHIFT 5
+#define stop__SLW CYREG_PRT6_SLW
 
 /* Up */
 #define Up__0__MASK 0x10u
@@ -479,7 +521,7 @@
 #define CYDEV_ECC_ENABLE 0
 #define CYDEV_HEAP_SIZE 0x1000
 #define CYDEV_INSTRUCT_CACHE_ENABLED 1
-#define CYDEV_INTR_RISING 0x00000000u
+#define CYDEV_INTR_RISING 0x00000001u
 #define CYDEV_PROJ_TYPE 0
 #define CYDEV_PROJ_TYPE_BOOTLOADER 1
 #define CYDEV_PROJ_TYPE_LOADABLE 2
